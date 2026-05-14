@@ -6,6 +6,10 @@ import Contact   from './Pages/Contact/page';
 import Login     from './Pages/Login/page';
 import Signup    from './Pages/Signup/page';
 import Dashboard from './Pages/Dashboard/page';
+import Cart      from './Pages/Cart/page';
+import Review    from './Pages/Review/page';
+import Profile   from './Pages/Profile/page';
+import Team      from './Pages/Team/page';
 
 export default function App() {
   return (
@@ -18,6 +22,10 @@ export default function App() {
         <Route path="/login"     element={<Login />}     />
         <Route path="/signup"    element={<Signup />}    />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/cart"      element={<Cart />}      />
+        <Route path="/review"    element={<Review />}    />
+        <Route path="/profile"   element={<Profile />}   />
+        <Route path="/team"      element={<Team />}      />
       </Routes>
     </BrowserRouter>
   );

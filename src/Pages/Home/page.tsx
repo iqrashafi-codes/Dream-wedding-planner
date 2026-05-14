@@ -5,6 +5,13 @@ import Footer from '../../Components/Footer/page';
 export default function Home() {
   const navigate = useNavigate();
 
+  const features = [
+    { icon: '🏛️', title: 'Grand Halls',     text: 'Capacity for 50 to 1000 guests with multiple hall styles.' },
+    { icon: '🍽️', title: 'Fine Catering',   text: 'Curated menus from experienced chefs.' },
+    { icon: '💐',  title: 'Full Decoration', text: 'In-house decoration team for your theme.' },
+    { icon: '📸', title: 'Photography',      text: 'Professional photographers for every moment.' },
+  ];
+
   const previewItems = [
     { src: '/images/image1.jpeg', label: 'Royal Banquet Hall' },
     { src: '/images/image2.jpg',  label: 'Luxury Wedding Stage' },
@@ -14,61 +21,76 @@ export default function Home() {
     { src: '/images/image6.jpg',  label: 'Premium Decor' },
   ];
 
-  const features = [
-    { icon: '🏛️', title: 'Grand Halls',     text: 'Capacity for 50 to 1000 guests with multiple hall styles to suit your vision.' },
-    { icon: '🍽️', title: 'Fine Catering',   text: 'Curated menus from experienced chefs covering traditional and contemporary cuisine.' },
-    { icon: '💐',  title: 'Full Decoration', text: 'In-house decoration team to bring your theme and colour palette to life.' },
-    { icon: '📸', title: 'Photography',      text: 'Professional photographers and videographers capturing every precious moment.' },
-  ];
-
   return (
     <>
       <Navbar />
 
-      <header className="hero">
-        <div className="hero-content">
-          <p className="hero-tag">Islamabad's Premier Wedding Venue</p>
-          <h1 className="hero-title">Your Perfect Day,<br />Beautifully Planned</h1>
-          <p className="hero-desc">From elegant halls to world-class catering, we handle every detail so you can enjoy every moment.</p>
-          <div className="hero-buttons">
-            <button className="btn btn-gold" onClick={() => navigate('/contact')}>Book Your Date</button>
-            <button className="btn btn-outline" onClick={() => navigate('/gallery')}>View Gallery</button>
+      {/* HERO */}
+        <header className="bg-black dark:bg-gray-950 text-white py-24 px-10 text-center">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-gold text-xs uppercase tracking-widest mb-4 font-semibold">
+            Islamabad's Premier Wedding Venue
+          </p>
+          <h1 className="font-heading text-5xl leading-tight mb-5 text-white">
+            Your Perfect Day,<br />Beautifully Planned
+          </h1>
+          <p className="text-gray-300 text-lg mb-9 max-w-xl mx-auto">
+            From elegant halls to world-class catering, we handle every detail so you can enjoy every moment.
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <button onClick={() => navigate('/contact')}
+              className="bg-gold text-black font-semibold px-8 py-3 rounded-lg hover:bg-gold-dark hover:text-white transition-all">
+              Book Your Date
+            </button>
+            <button onClick={() => navigate('/gallery')}
+              className="bg-transparent text-white border-2 border-white px-8 py-3 rounded-lg hover:bg-white hover:text-black transition-all">
+              View Gallery
+            </button>
           </div>
         </div>
       </header>
 
-      <section className="features">
+      {/* FEATURES */}
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-6 px-10 py-16 bg-white dark:bg-gray-900">
         {features.map((f) => (
-          <div className="feature-card" key={f.title}>
-            <div className="feature-icon">{f.icon}</div>
-            <h3 className="feature-title">{f.title}</h3>
-            <p className="feature-text">{f.text}</p>
+          <div key={f.title} className="bg-amber-50 dark:bg-gray-800 border border-amber-100 dark:border-gray-700 rounded-xl p-8 text-center hover:shadow-xl hover:-translate-y-1 transition-all">
+            <div className="text-4xl mb-4">{f.icon}</div>
+            <h3 className="font-heading text-gold-dark text-lg mb-2">{f.title}</h3>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">{f.text}</p>
           </div>
         ))}
       </section>
 
-      <section className="gallery-preview">
-        <h2 className="section-title">A Glimpse of Our Venue</h2>
-        <p className="section-subtitle">Elegance in every corner</p>
-        <div className="preview-grid">
+      {/* GALLERY PREVIEW */}
+      <section className="py-16 px-10 bg-amber-50 dark:bg-gray-800">
+        <h2 className="font-heading text-3xl text-gray-900 dark:text-white text-center mb-2">A Glimpse of Our Venue</h2>
+        <p className="text-center text-gray-500 dark:text-gray-400 italic mb-10">Elegance in every corner</p>
+        <div className="grid grid-cols-3 gap-5 max-w-5xl mx-auto mb-9">
           {previewItems.map((item) => (
-            <div className="preview-item" key={item.label}>
-              <img src={item.src} alt={item.label} className="preview-img" />
-              <div className="preview-overlay">
-                <span className="preview-label">{item.label}</span>
+            <div key={item.label} className="relative overflow-hidden rounded-xl bg-gray-800 group">
+              <img src={item.src} alt={item.label} className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white text-sm font-semibold">{item.label}</span>
               </div>
             </div>
           ))}
         </div>
-        <div className="center-btn">
-          <button className="btn btn-gold" onClick={() => navigate('/gallery')}>View Full Gallery</button>
+        <div className="text-center">
+          <button onClick={() => navigate('/gallery')}
+            className="bg-gold text-black font-semibold px-8 py-3 rounded-lg hover:bg-gold-dark hover:text-white transition-all">
+            View Full Gallery
+          </button>
         </div>
       </section>
 
-      <section className="cta-section">
-        <h2 className="cta-title">Ready to Plan Your Dream Wedding?</h2>
-        <p className="cta-desc">Contact us today and let our expert team make your special day unforgettable.</p>
-        <button className="btn btn-gold" onClick={() => navigate('/contact')}>Book a Consultation</button>
+      {/* CTA */}
+      <section className="bg-gradient-to-br from-gold to-gold-dark py-20 px-10 text-center">
+        <h2 className="font-heading text-3xl text-gray-900 mb-3">Ready to Plan Your Dream Wedding?</h2>
+        <p className="text-gray-800 text-lg mb-7">Contact us today and let our expert team make your special day unforgettable.</p>
+        <button onClick={() => navigate('/contact')}
+          className="bg-gray-900 text-white font-semibold px-8 py-3 rounded-lg hover:bg-gray-700 transition-all">
+          Book a Consultation
+        </button>
       </section>
 
       <Footer />

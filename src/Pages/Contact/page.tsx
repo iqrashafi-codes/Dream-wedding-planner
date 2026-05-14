@@ -23,46 +23,42 @@ export default function Contact() {
     <>
       <Navbar />
 
-      <div className="form-page">
-        <div className="form-container">
-          <h2 className="form-title">Book Your Date</h2>
-          <p className="form-tagline">Fill out the form and we will get back to you within 24 hours</p>
+      <div className="min-h-screen flex items-center justify-center bg-amber-50 dark:bg-gray-900 py-10 px-5">
+        <div className="bg-white dark:bg-gray-800 border border-amber-100 dark:border-gray-700 rounded-xl p-12 w-full max-w-md shadow-lg">
+          <h2 className="font-heading text-3xl text-gold-dark text-center mb-2">Book Your Date</h2>
+          <p className="text-center text-gray-500 dark:text-gray-400 text-sm mb-8">Fill out the form and we will get back to you within 24 hours</p>
 
           {alert && (
-            <div className={`alert-box ${alert.type === 'success' ? 'alert-success' : 'alert-error'}`}>
+            <div className={`rounded-lg px-4 py-3 mb-5 text-sm ${alert.type === 'success' ? 'bg-green-100 text-green-800 border border-green-300' : 'bg-red-50 text-red-800 border border-red-200'}`}>
               {alert.msg}
             </div>
           )}
 
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name" className="form-label">Full Name *</label>
-              <input type="text" id="name" className="form-input" placeholder="Your full name" value={form.name} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">Email Address *</label>
-              <input type="email" id="email" className="form-input" placeholder="your@email.com" value={form.email} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="phone" className="form-label">Phone Number</label>
-              <input type="tel" id="phone" className="form-input" placeholder="+92 300 0000000" value={form.phone} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="eventDate" className="form-label">Event Date *</label>
-              <input type="date" id="eventDate" className="form-input" value={form.eventDate} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="guests" className="form-label">Number of Guests *</label>
-              <input type="number" id="guests" className="form-input" placeholder="e.g. 300" value={form.guests} onChange={handleChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message" className="form-label">Special Requirements</label>
-              <input type="text" id="message" className="form-input" placeholder="Any special requests..." value={form.message} onChange={handleChange} />
-            </div>
-            <button type="submit" className="btn btn-gold form-submit">Send Booking Request</button>
+            {[
+              { id: 'name',      label: 'Full Name *',          type: 'text',   placeholder: 'Your full name'     },
+              { id: 'email',     label: 'Email Address *',      type: 'email',  placeholder: 'your@email.com'     },
+              { id: 'phone',     label: 'Phone Number',         type: 'tel',    placeholder: '+92 300 0000000'    },
+              { id: 'eventDate', label: 'Event Date *',         type: 'date',   placeholder: ''                   },
+              { id: 'guests',    label: 'Number of Guests *',   type: 'number', placeholder: 'e.g. 300'           },
+              { id: 'message',   label: 'Special Requirements', type: 'text',   placeholder: 'Any special requests'},
+            ].map((f) => (
+              <div key={f.id} className="mb-5">
+                <label htmlFor={f.id} className="block text-sm font-semibold text-gray-800 mb-1">{f.label}</label>
+                <input type={f.type} id={f.id} placeholder={f.placeholder} value={(form as any)[f.id]}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-amber-100 dark:border-gray-600 rounded-lg text-sm bg-amber-50 dark:bg-gray-700 dark:text-white text-gray-900 outline-none focus:border-gold focus:ring-2 focus:ring-yellow-200" />
+              </div>
+            ))}
+            <button type="submit"
+              className="w-full bg-gold text-black font-semibold py-3 rounded-lg hover:bg-gold-dark hover:text-white transition-all mt-2">
+              Send Booking Request
+            </button>
           </form>
 
-          <p className="form-footer">Need help? Call us at <strong>+92 51 000 0000</strong></p>
+          <p className="text-center mt-5 text-sm text-gray-500">
+            Need help? Call us at <strong>+92 51 000 0000</strong>
+          </p>
         </div>
       </div>
 
